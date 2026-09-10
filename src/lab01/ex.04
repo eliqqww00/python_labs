@@ -1,0 +1,4 @@
+m=int(input())
+min=m//60
+sec=m%60
+print(f'{min}:{sec}')
