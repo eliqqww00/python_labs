@@ -1,4 +1,4 @@
-fio=str(input())
+fio=str(input('ФИО: '))
 a=' '.join(fio.split())
 iii=''.join([j[0] for j in fio.split()])
 print(f'ФИО: {a}')
