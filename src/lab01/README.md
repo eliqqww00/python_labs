@@ -9,25 +9,25 @@
 
 ## Задание 1
  результат выполнения скрипта 01_greeting.py (приветствие и расчет возраста)
-![](src/images/lab01/img.ex01.png)
+![](../../src/images/lab01/img.ex01.png)
 
 
 ## Задание 2
 результат выполнения скрипта 02_sum_avg.py (вычисление суммы и среднего арифметического)
 
-![](src/images/lab01/img.ex02.png)
+![](../../src/images/lab01/img.ex02.png)
 
 
 ## Задание 3
 результат выполнения скрипта 03_discount_vat.py (расчет скидки и НДС)
-![](src/images/lab01/img.ex03.png)
+![](../../src/images/lab01/img.ex03.png)
 
 
 ## Задание 4
 результат выполнения скрипта 04_minutes_to_hhmm.py (конвертация минут в формат часы:минуты)
-![](src/images/lab01/img.ex04.png)
+![](../../src/images/lab01/img.ex04.png)
 
 
 ## Задание 5
 результат выполнения скрипта 05_initials_and_len.py (получение инициалов из ФИО и подсчет длины строки)
-![](src/images/lab01/img.ex05.png)
+![](../../src/images/lab01/img.ex05.png)
