@@ -1,6 +1,5 @@
 fio=str(input('ФИО: '))
 a=' '.join(fio.split())
-iii=''.join([j[0] for j in fio.split()])
-print(f'ФИО: {a}')
+iii=''.join([j[0].upper() for j in fio.split()])
 print(f'Инициалы: {iii}.')
 print(f'Длина (символов): {len(a)}')
