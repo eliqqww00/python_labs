@@ -1,4 +1,5 @@
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
+
     ''' Вычисляет максимум и минимум списка
 
     Args: 
@@ -10,8 +11,9 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     Raises:
         ValueError: Если список пустой
     '''
+
     if len(nums)==0: 
-        raise ValueError ('пустой список')
+        raise ValueError ('Пустой список')
     minimum=nums[0]
     maximim=nums[0]
     for i in nums:
@@ -22,8 +24,7 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     return (minimum,maximim)
 
 print(f'''
-тест кейсы:
-
+тест кейсы / min_max
 [3, -1, 5, 5, 0] -> {min_max([3, -1, 5, 5, 0])}
 [42] -> {min_max([42])}
 [-5, -2, -9] -> {min_max([-5, -2, -9])}

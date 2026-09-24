@@ -1,7 +1,20 @@
-def col_sums(mat):
+def col_sums(mat: list[list[float | int]]) -> list[float]:
+
+    '''Сумма по каждому столбцу
+
+    Args:
+        mat: Матрица чисел
+
+    Returns:
+        Список сумм по столбцам
+
+    Raises:
+        ValueError: Строки разной длины
+    '''
+
     for row in mat:
             if len(row) != len(mat[0]):
-                raise ValueError
+                raise ValueError ('Строки разной длины')
     res=[]
     for j in range(len(mat[0])):
         s=0
@@ -10,7 +23,11 @@ def col_sums(mat):
         res.append(s)
     return res
 
-print(col_sums([[1, 2, 3], [4, 5, 6]]))
-print(col_sums([[-1, 1], [10, -10]]))
-print(col_sums([[0, 0], [0, 0]]))
-# print([[1, 2], [3]])
+print(f'''
+тест кейсы / col_sums
+[[1, 2, 3], [4, 5, 6]] → {col_sums([[1, 2, 3], [4, 5, 6]])}
+[[-1, 1], [10, -10]] → {col_sums([[-1, 1], [10, -10]])}
+[[0, 0], [0, 0]] → {col_sums([[0, 0], [0, 0]])}
+''')
+# Возвращает ошибку ValueError
+# print(f'[[1, 2], [3]] -> {col_sums([[1, 2], [3]])}')

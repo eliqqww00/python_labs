@@ -1,4 +1,5 @@
 def format_record(rec: tuple[str, str, float]) -> str:
+    
     '''Функция форматирует запись, приводя ее в вид 
     Иванов И.И., гр. BIVT-25, GPA 4.60
 
