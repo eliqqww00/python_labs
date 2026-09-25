@@ -37,7 +37,7 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError('GPA должен быть от 0.0 до 5.0')
     if len(rec[0].strip().split()) != 3 and len(rec[0].strip().split()) != 2:
         raise ValueError('Введено не полное ФИО')
-    if not len(rec[1].strip()):
+    if len(rec[1].strip())==0:
         raise ValueError('Группа не может быть пустой')
 
     fio_parts=rec[0].strip().split()
