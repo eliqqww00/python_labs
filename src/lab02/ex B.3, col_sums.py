@@ -13,12 +13,12 @@ def col_sums(mat: list[list[float | int]]) -> list[float]:
     '''
 
     for row in mat:
-            if len(row) != len(mat[0]):
-                raise ValueError ('Строки разной длины')
+        if len(row) != len(mat[0]):
+            raise ValueError ('Строки разной длины')
     res=[]
-    for j in range(len(mat[0])):
+    for j in range(len(mat[0])):  #столбцы
         s=0
-        for i in range(len(mat)):
+        for i in range(len(mat)):  #строки
             s+=mat[i][j]
         res.append(s)
     return res
@@ -30,4 +30,4 @@ print(f'''
 [[0, 0], [0, 0]] → {col_sums([[0, 0], [0, 0]])}
 ''')
 # Возвращает ошибку ValueError
-print(f'[[1, 2], [3]] -> {col_sums([[1, 2], [3]])}')
+# print(f'[[1, 2], [3]] -> {col_sums([[1, 2], [3]])}')

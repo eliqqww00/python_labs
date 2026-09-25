@@ -15,9 +15,10 @@ def format_record(rec: tuple[str, str, float]) -> str:
             'Имя должно быть строкой'
             'Группа должна быть строкой'
             'Оценка должна быть вещественным числом'
+            'GPA должен быть от 0.0 до 5.0'
         ValueError:
             'В кортеже должно быть 3 элемента'
-            'Ведено не полное ФИО'
+            'Введено не полное ФИО'
             'Группа не может быть пустой'
     '''
 
@@ -32,12 +33,14 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise TypeError('Группа должна быть строкой')
     if not isinstance(rec[2], (float, int)):
         raise TypeError('Оценка должна быть вещественным числом')
+    if rec[2] < 0.0 or rec[2] > 5.0:
+        raise ValueError('GPA должен быть от 0.0 до 5.0')
     if len(rec[0].strip().split()) != 3 and len(rec[0].strip().split()) != 2:
-        raise ValueError('Ведено не полное ФИО')
+        raise ValueError('Введено не полное ФИО')
     if not len(rec[1].strip()):
         raise ValueError('Группа не может быть пустой')
 
-    fio_parts=rec[0].split()
+    fio_parts=rec[0].strip().split()
     name=fio_parts[1]
     surname=fio_parts[0].capitalize()
     group=rec[1]
@@ -56,3 +59,5 @@ print(f'''
 ("Петров Пётр Петрович", "IKBO-12", 5.0) -> {format_record(("Петров Пётр Петрович", "IKBO-12", 5.0))}
 ("  сидорова  анна   сергеевна ", "ABB-01", 3.999) -> {format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999))}
 ''')
+#Возвращает ошибку TypeError
+#print(f'("Иванов Иван", "BIVT-25", 5.1) -> {format_record(("Иванов Иван", "BIVT-25", 5.1))}')

@@ -11,7 +11,8 @@ def row_sums(mat: list[list[float | int]]) -> list[float]:
     Raises:
         ValueError: Строки разной длины
     '''
-
+    if len(mat)==0:
+        return []
     res=[]
     for i in mat:
         if len(i)!=len(mat[0]):
