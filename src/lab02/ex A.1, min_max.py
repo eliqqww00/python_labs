@@ -15,13 +15,13 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     if len(nums)==0: 
         raise ValueError ('Пустой список')
     minimum=nums[0]
-    maximim=nums[0]
+    maximum=nums[0]
     for i in nums:
         if i<minimum:
             minimum=i
-        if i>maximim:
-            maximim=i
-    return (minimum,maximim)
+        if i>maximum:
+            maximum=i
+    return (minimum,maximum)
 
 print(f'''
 тест кейсы / min_max
