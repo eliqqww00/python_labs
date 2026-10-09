@@ -69,11 +69,13 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     qq=sorted(res,key=lambda w: (-w[1],w[0]))
     return qq[:n]
 
+
 text=stdin.read()
 norm_text=normalize(text)
 tokens=tokenize(norm_text)
 pairs=count_freq(tokens)
 top5=top_n(pairs)
+
 print(f'''
 Всего слов: {len(tokens)}
 Уникальных слов: {len(set(tokens))}
