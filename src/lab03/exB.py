@@ -70,12 +70,13 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     return qq[:n]
 
 text=stdin.read()
-text=normalize(text)
-n=len(text)
-k=len(set(text))
-freq=tokenize(text)
-pairs=count_freq(freq)
-print(pairs)
-top=top_n(pairs)
-for world,count in top:
+norm_text=normalize(text)
+tokens=tokenize(norm_text)
+pairs=count_freq(tokens)
+top5=top_n(pairs)
+print(f'''
+Всего слов: {len(tokens)}
+Уникальных слов: {len(set(tokens))}
+Топ 5: ''')
+for world,count in top5:
     print(f"{world}:{count}")

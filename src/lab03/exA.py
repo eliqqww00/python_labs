@@ -67,3 +67,31 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     res=freq.items()  # получаем список вида (значение + колво)
     qq=sorted(res,key=lambda w: (-w[1],w[0]))
     return qq[:n]
+
+print (f'''
+тест кейсы / normalize
+
+"ПрИвЕт\nМИр\t" -> {normalize("ПрИвЕт\nМИр\t")}
+"ёжик, Ёлка" -> {normalize("ёжик, Ёлка")}
+"Hello\r\nWorld" -> {normalize("Hello\r\nWorld")}
+"  двойные   пробелы  " -> {normalize("  двойные   пробелы  ")}
+''')
+
+print (f'''
+тест кейсы / tokenize
+
+"привет мир" -> {tokenize("привет мир")}
+"hello,world!!!" -> {tokenize("hello,world!!!")}
+"по-настоящему круто" -> {tokenize("по-настоящему круто")}
+"2025 год" -> {tokenize("2025 год")}
+"emoji 😀 не слово" -> {tokenize("emoji 😀 не слово")}
+''')
+
+print (f'''
+тест кейсы / count_freq + top_n
+
+Токены ["a","b","a","c","b","a"] -> частоты {count_freq(["a","b","a","c","b","a"])}
+top_n(..., n=2) -> {top_n({'a': 3, 'b': 2, 'c': 1},2)}
+При равенстве частот: токены ["bb","aa","bb","aa","cc"] → частоты {count_freq(["bb","aa","bb","aa","cc"])}
+top_n(..., n=2) → {top_n({'bb': 2, 'aa': 2, 'cc': 1},2)} (алфавитная сортировка при равенстве).
+''')
