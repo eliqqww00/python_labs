@@ -131,6 +131,9 @@ for word,count in top_5:
 ```
 
 ### Пример запуска.
+```bash
+python -m src.lab04.text_report
+```
 Читается ``data/lab04/input.txt``, результат записывается в ``data/lab04/report.csv``
 Результаты выполнения:
 
