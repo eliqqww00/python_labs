@@ -35,19 +35,17 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 def write_csv(rows: list[tuple | list], path: str | Path,
               header: tuple[str, ...] | None = None) -> None:
     '''Записывает строки в CSV-файл
-        Args:
-            rows: Итерируемый объект строк, которые нужно внести в файл
-            path: Путь к файлу записи
-            header: Заголовок файла
-    
-        Returns:
-            None
-    
-        Raises:
-            ValueError: Строки разной длинны
+
+    Args:
+        rows: Список строк (кортежи или списки одинаковой длины)
+        path: Путь к файлу записи
+        header: Заголовок, записывается первой строкой, если передан
+
+    Raises:
+        ValueError: строки разной длины
     '''
     p = Path(path)  #превращает путь в path
-    rows = list(rows)
+    rows = list(rows)  #генератор строк -> список
 
     if rows:
         etalon = len(rows[0])
@@ -59,9 +57,9 @@ def write_csv(rows: list[tuple | list], path: str | Path,
     with p.open('w', newline="", encoding="utf-8") as f:
         w = csv.writer(f) #создаем писателя csv
         if header is not None:
-            w.writerow(header)
+            w.writerow(header)  #если заголовок передали -> записываем первой строкой
         for r in rows:
-            w.writerow(r)
+            w.writerow(r)  #записываем остальные строки
 ```
 Если передан параметр ``header``, он записывается первой строкой файла.
 
@@ -106,15 +104,23 @@ def ensure_parent_dir(path: str | Path) -> None:
 ```python
 from src.lib.functools import read_text, write_csv
 from src.lib.functools import normalize,tokenize,count_freq,top_n
+import sys
 
-text=read_text("data/lab04/input.txt")
+try:
+    text = read_text("data/lab04/input.txt")
+except FileNotFoundError:
+    print("файл не найден: data/lab04/input.txt", file=sys.stderr)
+    sys.exit(1)
+except UnicodeDecodeError:
+    print("кодировка не подходит: utf-8", file=sys.stderr)
+    sys.exit(1)
 
 words=tokenize(normalize(text))
 counts=count_freq(words)
 top_5=top_n(counts)
 
 rows=sorted(counts.items(), key=lambda w: (-w[1],w[0]))
-write_csv(rows,"data/lab04/report.csv",['word','count'])
+write_csv(rows,"data/lab04/report.csv",('word','count'))
 
 print(f'''
 Всего слов: {len(words)}

@@ -33,16 +33,14 @@ def ensure_parent_dir(path: str | Path) -> None:
 def write_csv(rows: list[tuple | list], path: str | Path,
               header: tuple[str, ...] | None = None) -> None:
     '''Записывает строки в CSV-файл
-        Args:
-            rows: Итерируемый объект строк, которые нужно внести в файл
-            path: Путь к файлу записи
-            header: Заголовок файла
-    
-        Returns:
-            None
-    
-        Raises:
-            ValueError: Строки разной длинны
+
+    Args:
+        rows: Список строк (кортежи или списки одинаковой длины)
+        path: Путь к файлу записи
+        header: Заголовок, записывается первой строкой, если передан
+
+    Raises:
+        ValueError: строки разной длины
     '''
     p = Path(path)  #превращает путь в path
     rows = list(rows)  #генератор строк -> список
@@ -62,11 +60,11 @@ def write_csv(rows: list[tuple | list], path: str | Path,
             w.writerow(r)  #записываем остальные строки
 
 
-
+#мини тесты
 print(read_text("data/lab04/input.txt")) # должен вернуть строку
 write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создаст CSV
 
-#краевые случаи
+#краевые случаи для А
 # 1. пустой файл
 print(read_text("data/lab04/empty,a.txt"))
 # 2. пустой rows без header -> пустой файл
