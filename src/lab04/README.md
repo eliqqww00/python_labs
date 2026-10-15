@@ -26,6 +26,7 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 
 ![](../../images/lab04/soder.png)
 ![](../../images/lab04/read_text.png)
+
 *входные данные + результат чтения содержимого*
 
 ### A2. Функция ``write_csv``
@@ -84,14 +85,17 @@ def ensure_parent_dir(path: str | Path) -> None:
 
 ### Краевые случаи (Задание А)
 1. **Пустой файл.** `read_text` возвращает пустую строку `""`.
+
 ![](../../images/lab04/empty_file(1).png)
 
 2. **`write_csv` с пустым `rows` и `header=None`.** Создаётся пустой файл (0 строк).
 
 3. **`write_csv` с пустым `rows` и `header=("a", "b")`.** Файл содержит только заголовок `a,b`.
+
 ![](../../images/lab04/header_only(3).png)
 
 4. **Строки разной длины.** Выбрасывается `ValueError: Строки разной длины`.
+
 ![](../../images/lab04/bad(4).png)
 
 
@@ -124,17 +128,21 @@ for word,count in top_5:
 Результаты выполнения:
 
 ![](../../images/lab04/text_report,file.png)
+
 *файл `data/lab04/report.csv` (слова и их частоты, отсортированные по убыванию частоты, при равенстве по алфавиту).*
 
 
 ![](../../images/lab04/text_report,consol.png)
+
 *вывод в консоль: общее число слов, число уникальных слов и топ-5 самых частых.*
 
 ### Краевые случаи (задание B)
 1. **Входной файл не существует.** Если `data/lab04/input.txt` не найден, скрипт выводит в `stderr` сообщение `файл не найден: data/lab04/input.txt`.
+
 ![](../../images/lab04/fine_not,b.png)
 
 2. **Пустой вход.** Если `input.txt` пустой, `report.csv` содержит только заголовок `word,count`. В консоль выводится `Всего слов: 0`, `Уникальных слов: 0` и пустой список топ-5.
+
 ![](../../images/lab04/empty_file,b.png)
 ![](../../images/lab04/empty_file_consol,b.png)
 
