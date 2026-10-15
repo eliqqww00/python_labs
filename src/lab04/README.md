@@ -81,6 +81,7 @@ def ensure_parent_dir(path: str | Path) -> None:
 ```
 
 ![](../../images/lab04/write_csv.png)
+
 *рез. записи данных в CSV-файл*
 
 ### Краевые случаи (Задание А)
