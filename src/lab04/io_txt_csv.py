@@ -59,17 +59,17 @@ def write_csv(rows: list[tuple | list], path: str | Path,
         for r in rows:
             w.writerow(r)
 
+if __name__ == "__main__":
+    #мини тесты
+    print(read_text("data/lab04/input.txt")) # должен вернуть строку
+    write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создаст CSV
 
-#мини тесты
-print(read_text("data/lab04/input.txt")) # должен вернуть строку
-write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создаст CSV
-
-#краевые случаи для А
-# 1. пустой файл
-print(read_text("data/lab04/empty,a.txt"))
-# 2. пустой rows без header -> пустой файл
-write_csv([], "data/lab04/empty,a.csv")
-# 3. пустой rows с header -> только заголовок
-write_csv([], "data/lab04/header_only,a.csv", header=("a", "b"))
-# 4. строки разной длины -> ValueError
-write_csv([("a", 1), ("b",)], "data/lab04/bad,a.csv")
+    #краевые случаи для А
+    # 1. пустой файл
+    print(read_text("data/lab04/empty,a.txt"))
+    # 2. пустой rows без header -> пустой файл
+    write_csv([], "data/lab04/empty,a.csv")
+    # 3. пустой rows с header -> только заголовок
+    write_csv([], "data/lab04/header_only,a.csv", header=("a", "b"))
+    # 4. строки разной длины -> ValueError
+    write_csv([("a", 1), ("b",)], "data/lab04/bad,a.csv")
