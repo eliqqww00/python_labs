@@ -42,8 +42,8 @@ def write_csv(rows: list[tuple | list], path: str | Path,
     Raises:
         ValueError: строки разной длины
     '''
-    p = Path(path)  #превращает путь в path
-    rows = list(rows)  #генератор строк -> список
+    p = Path(path)
+    rows = list(rows)
 
     if rows:
         etalon = len(rows[0])
@@ -55,9 +55,9 @@ def write_csv(rows: list[tuple | list], path: str | Path,
     with p.open('w', newline="", encoding="utf-8") as f:
         w = csv.writer(f) #создаем писателя csv
         if header is not None:
-            w.writerow(header)  #если заголовок передали -> записываем первой строкой
+            w.writerow(header)
         for r in rows:
-            w.writerow(r)  #записываем остальные строки
+            w.writerow(r)
 
 
 #мини тесты
