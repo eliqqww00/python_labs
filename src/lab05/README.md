@@ -117,7 +117,7 @@ csv_to_json("data/lab05/samples/people.csv","data/lab05/out/people_from_src")
 ```
 Запуск:
 ```powershell
-python -m src.lab05.json_to_csv
+python -m src.lab05.json_csv
 ```
 При запуске создаются следующие файлы:
 
