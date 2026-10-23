@@ -33,28 +33,28 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     
     with jp.open(encoding="utf-8") as f:
         try:
-            data = json.load(f)   #json -> python. загрузили в f
+            data = json.load(f) #json -> python
             #data - список словарей
         except json.JSONDecodeError:
             raise ValueError("Пустой JSON или неподдерживаемая структура")
 
-    if not isinstance(data, list) or len(data) == 0:  #если НЕ список или пустой -> ошибка
+    if not isinstance(data, list) or len(data) == 0:
         raise ValueError('Файл JSON пустой или имеет неправильный формат')
     
     if not all(isinstance(item, dict) for item in data):
         raise ValueError('Все элементы списка JSON должны быть словарями')
 
     names=[]
-    for item in data: #ключ значение
+    for item in data:
         for key in item:
             if key not in names:
-                names.append(key)  #записали все ключи, те колонки
+                names.append(key)
     
     ensure_parent_dir(cp)
     with cp.open("w",encoding="utf-8",newline="") as f:
         w= csv.DictWriter(f,fieldnames=names) #создали писателя, (куда писать,колонки)
-        w.writeheader() #пишет первую строку, берет из списка names
-        w.writerows(data) #пишет строки и автоматически раскидывает их по колонкам
+        w.writeheader()
+        w.writerows(data)
 
 
 
@@ -85,8 +85,8 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     if cp.suffix.lower() != '.csv':
         raise ValueError("Указанный файл не формата CSV")
     with cp.open("r",encoding='utf-8',newline='') as f:
-        reader = csv.DictReader(f) # каждая строка -> словарь
-        if reader.fieldnames is None:  #заголовки отсуствуют
+        reader = csv.DictReader(f) #каждая строка -> словарь
+        if reader.fieldnames is None:
             raise ValueError("Файл CSV пустой")
 
         data = list(reader)  #список словарей
