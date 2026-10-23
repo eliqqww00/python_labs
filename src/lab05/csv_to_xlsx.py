@@ -41,6 +41,16 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
     ws.title = "Sheet1" #задает название листа
     for row in rows:
         ws.append(row) #добавляет список значений как новую строку
+
+    for col in ws.columns:
+        max_len=0
+        letter = col[0].column_letter
+
+        for cell in col:
+            if cell.value and len(str(cell.value))>max_len:
+                max_len=len(str(cell.value))
+        ws.column_dimensions[letter].width=max(max_len,8)
+    
     ensure_parent_dir(xlp)
     wb.save(xlp)
 
