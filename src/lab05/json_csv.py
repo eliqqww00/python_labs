@@ -34,6 +34,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     with jp.open(encoding="utf-8") as f:
         try:
             data = json.load(f)   #json -> python. загрузили в f
+            #data - список словарей
         except json.JSONDecodeError:
             raise ValueError("Пустой JSON или неподдерживаемая структура")
 
@@ -44,10 +45,10 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         raise ValueError('Все элементы списка JSON должны быть словарями')
 
     names=[]
-    for item in data:
+    for item in data: #ключ значение
         for key in item:
             if key not in names:
-                names.append(key)
+                names.append(key)  #записали все ключи, те колонки
     
     ensure_parent_dir(cp)
     with cp.open("w",encoding="utf-8",newline="") as f:
@@ -84,7 +85,7 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     if cp.suffix.lower() != '.csv':
         raise ValueError("Указанный файл не формата CSV")
     with cp.open("r",encoding='utf-8',newline='') as f:
-        reader = csv.DictReader(f)
+        reader = csv.DictReader(f) # каждая строка -> словарь
         if reader.fieldnames is None:  #заголовки отсуствуют
             raise ValueError("Файл CSV пустой")
 
@@ -95,7 +96,7 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
     ensure_parent_dir(jp)
     with jp.open('w',encoding='utf-8') as p:
         json.dump(data, p, ensure_ascii=False, indent=2) #python -> json,
-        # (что записываем, открытый файл\куда пишем, настройки)
+        #(что записываем, открытый файл\куда пишем, настройки)
 
 if __name__ == '__main__':
     json_to_csv("data/lab05/samples/people.json","data/lab05/out/people_from_json")

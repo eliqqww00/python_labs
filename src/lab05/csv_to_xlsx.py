@@ -36,11 +36,11 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
         raise ValueError("Файл CSV пустой")
 
 
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Sheet1"
+    wb = Workbook() #создает новую пустую книгу excel
+    ws = wb.active #возвраащет первый лист
+    ws.title = "Sheet1" #задает название листа
     for row in rows:
-        ws.append(row)
+        ws.append(row) #добавляет список значений как новую строку
     ensure_parent_dir(xlp)
     wb.save(xlp)
 
