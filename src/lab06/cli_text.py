@@ -4,7 +4,7 @@ from src.lib.functools import normalize, tokenize, top_n, count_freq, read_text
 
 def cat_cmd(input_path: str, numbers: bool=False) -> None:
     path=Path(input_path)
-    if not path.exists():
+    if not path.is_file():
         raise FileNotFoundError("Файл не найден")
     with open(path, "r", encoding='utf-8') as f:
         for i,line in enumerate(f,start=1):
