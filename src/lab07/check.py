@@ -38,10 +38,17 @@ def check_search(trials=100):
             binary_targets.append(random.choise(sorted_nums))
         
         for x in binary_targets:
+            try:
+                expected == sorted_nums.index(x)
+            except ValueError:
+                expected = -1
             result = binary_search(sorted_nums,x)
-            # if x in sorted_nums:
-            # else:
-            #     assert -1, f'binary_search ошиблась на {sorted_nums}, x={x}'
+            if expected == -1:
+                assert result == -1, f"binary_search ошиблась на {sorted_nums}, x={x}: {result}, ожидалось -1"
+            else:
+                assert result != -1, f"binary_search не нашла {x} в {sorted_nums}"
+                assert sorted_nums[result] == x, f"binary_search вернула {result}, а там не {x}: {sorted_nums}"
+
     return count
 
 def check_two_sum(trials=100):
