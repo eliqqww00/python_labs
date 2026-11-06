@@ -13,6 +13,7 @@ def cat_cmd(input_path: str, numbers: bool=False) -> None:
             else:
                 print(f'{line}')
 
+
 def stats_cmd(input_path: str, top: int=5) -> None:
     path=Path(input_path)
     if not path.exists():
@@ -31,6 +32,7 @@ def stats_cmd(input_path: str, top: int=5) -> None:
     print(f'Топ-{top}:')
     for w,c in top_words:
         print(f'{w}:{c}')
+
 
 def main():
     parser = argparse.ArgumentParser(description="CLI‑утилиты лабораторной №6")
