@@ -16,7 +16,7 @@ def cat_cmd(input_path: str, numbers: bool=False) -> None:
 
 def stats_cmd(input_path: str, top: int=5) -> None:
     path=Path(input_path)
-    if not path.exists():
+    if not path.is_file():
         raise FileNotFoundError("Файл не найден")
 
     text=read_text(path)
