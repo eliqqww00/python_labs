@@ -1,7 +1,7 @@
 def linear_search(nums, x):
-    for i in nums:
-        if i==x:
-            return nums[i]
+    for i in range(len(nums)):
+        if nums[i]==x:
+            return i
     return -1
  
  
@@ -34,4 +34,3 @@ def two_sum_fast(nums, target):
             return seen[need],i
         seen[nums[i]] = i
     return None
-print(two_sum_fast([2, 7, 11, 15], 9))
