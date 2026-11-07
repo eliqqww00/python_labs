@@ -68,7 +68,7 @@ def main():
     for t, n, f, s in rows:
         print(f"{t:<12} | {n:<8} | {f:<20} | {s:<12}")
     print('-'*60)
-    print("Результаты сохранены в data/lab07/bench.csv")
+    print("Результаты сохранены в data/lab07/bench_result.csv")
 
 
 if __name__ == "__main__":
