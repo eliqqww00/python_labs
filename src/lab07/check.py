@@ -4,6 +4,7 @@ from src.lab07.search import linear_search, binary_search, two_sum_brute, two_su
  
  
 def check_sorting(fn, trials=100):
+    ''' Проверяет сортировку на случайных списках.'''
     count=0
     for _ in range(trials):
         n = random.randint(0, 50)
@@ -71,7 +72,7 @@ def check_two_sum(trials=100):
         count+=1
     return count
 
- 
+
 if __name__ == "__main__":
     random.seed(42)
     N=0

@@ -1,4 +1,6 @@
 def bubble_sort(nums):
+    ''' Возвращает отсортированный список методом пузырьковой сортировки. 
+    Исходный список не меняется. '''
     ln = len(nums)
     result=nums[:]
     for i in range(0,ln):
@@ -8,6 +10,8 @@ def bubble_sort(nums):
     return result
  
 def insertion_sort(nums):
+    ''' Возвращает отсортированный список методом сортировки вставками.
+    Исходный список не меняется. '''
     result = nums[:]
     for i in range(1,len(result)):
         key=result[i] #число, которое вставляем
@@ -20,6 +24,8 @@ def insertion_sort(nums):
  
  
 def selection_sort(nums):
+    ''' Возвращает отсортированный список методом сортировки выбором.
+    Исходный список не меняется. '''
     result=nums[:]
     ln=len(nums)
     for i in range(0,ln):
