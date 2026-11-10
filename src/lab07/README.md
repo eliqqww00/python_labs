@@ -214,7 +214,7 @@ def check_two_sum(trials=100):
 ```
 
 ### main
-Подсчет общего числа проверок + выводится подтверждение, что все n проверок пройдены.
+Подсчет общего числа проверок + выводится подтверждение, что все n проверок пройдены (300 для сортировок, 900 для поиска и 100 для Two Sum.)
 ```python
 if __name__ == "__main__":
     random.seed(42)
@@ -248,19 +248,33 @@ from src.lab04.io_txt_csv import write_csv
 from src.lab07.search import linear_search, binary_search, two_sum_brute, two_sum_fast
 from src.lab07.sorting import bubble_sort, insertion_sort, selection_sort
 ```
+### new_data
+Генерирует три списка длины 1_000,10_000,100_000 с рандомными числами и записывает их в три файла csv.
+```python 
+def new_data():
+    ''' генерирует списки с рандомными числами'''
+    sizes = (1_000,10_000,100_000)
+    for n in sizes:
+        nums = [random.randint(-1_000_000,1_000_000) for _ in range(n)]
+        rows = [[x] for x in nums]
+        write_csv(rows,f'data/lab07/samples/{n}_sort.csv',header=('value',))
+```
+### read_numbers
+Считывает данные из csv и возвращает список.
+```python
+def read_numbers(path):
+    ''' считывает данные из csv '''
+    with open(path, encoding="utf-8") as f:
+        return [int(row["value"]) for row in csv.DictReader(f)]
+```
 
 ### bench_sorts
-Создает случайные списки разных размеров и измеряет время сортировок с помощью timeit. Результат сохраняется в списке с кортежами данных.
+Считывает данные из csv файлов, измеряет время сортировок с помощью timeit. Результат сохраняется в списке с кортежами данных.
 ```python
 def bench_sorts():
-    random.seed(42)
     rows=[]
-    sizes = [1_000,10_000,100_000]
-    for n in sizes:
-        data = [random.randint(-1_000_000,1_000_000) for _ in range(n)]
-        times = timeit.timeit(lambda: sorted(data), number=1)
-
-        rows.append(("sorting", n, "sorted", f"{times:.6f}"))
+    for n in (1_000,10_000,100_000):
+        data = read_numbers(f'data/lab07/samples/{n}_sort.csv')
         funcs = [("bubble_sort", bubble_sort), ("insertion_sort", insertion_sort), ("selection_sort", selection_sort)]
 
         for name, fc in funcs:
@@ -276,14 +290,15 @@ def bench_sorts():
 Измеряет время линейного, бинарного поиска и двух вариантов two_sum с помощью timeit. Полученные данные записываются в кортежи, а потом объединяются в список.
 ```python
 def bench_search():
-    random.seed(42)
     rows=[]
-    data = [random.randint(-1_000_000,1_000_000) for _ in range(100_000)]
+    data = read_numbers(f'data/lab07/samples/100000_sort.csv')
     targets = [random.choice(data) for _ in range(10_000)]
 
+    # --- линейный поиск ---
     time_ls = timeit.timeit(lambda: [linear_search(data,t) for t in targets],  number =1)
     rows.append(("search", 100_000, "linear_search", f"{time_ls:.6f}"))
 
+    # --- бинарный поиск ---
     time_sbb=timeit.timeit(lambda: sorted(data), number=1)
     rows.append(("search", 100_000, "sort_before_binary", f"{time_sbb:.6f}"))
     sorted_data= sorted(data)
@@ -291,8 +306,9 @@ def bench_search():
     time_bs = timeit.timeit(lambda: [binary_search(sorted_data,t) for t in targets],  number =1)
     rows.append(("search", 100_000, "binary_search", f"{time_bs:.6f}"))
 
-    for n in [1_000,10_000]:
-        data_ts = [random.randint(-1_000_000,1_000_000) for _ in range(n)]
+    # --- суммы ---
+    for n in (1_000,10_000):
+        data_ts = read_numbers(f'data/lab07/samples/{n}_sort.csv')
         a, b = random.sample(data_ts, 2)
         target = a+b
 
@@ -309,6 +325,9 @@ def bench_search():
 Объединяет все полученные данные из предыдущих функций в общий csv файл и выводит эти же данные в виде таблицы в терминал.
 ```python
 def main():
+    random.seed(42)
+    new_data() #создаем три файла
+
     header = ("task", "n", "func", "seconds")
     rows=[]
     rows.extend(bench_sorts())
@@ -335,13 +354,13 @@ def main():
 ![](../../images/lab07/bench_csv.png)
 
 ## Вопросы
-1. Почему пузырёк при росте n в 10 раз замедляется в ~100 раз, а sorted — в ~12?
+1. _Почему пузырёк при росте n в 10 раз замедляется в ~100 раз, а sorted — в ~12?_
 Так как пузырьковая сортировка имеет сложность O(N^2), то при увелечении n в 10 раз, количество операций увеличивается в n^2 раз, следовательно время работы возрастает в 100 раз. Встроенная функция sorted() использует более эффективный алгоритм со сложностью O(N log N), поэтому при увеличении размера списка в 10 раз время ее работы возрастает примерно в 12 раз, а не в 100.
 
-2. Почему бинарный поиск бесполезен без предварительной сортировки, и когда она окупается?
+2. _Почему бинарный поиск бесполезен без предварительной сортировки, и когда она окупается?_
 Бинарный поиск работает только с отсортированным списком, поскольку использует порядок элементов, чтобы каждый раз отбрасывать половину списка. Сама сортировка требует дополнительного времени O(N log N), поэтому при одном-двух запросах линейный поиск по неотсортированному списку может быть выгоднее. При большом количестве запросов сортировка окупается, так как каждый последующий поиск выполняется за O(log N) вместо O(N).
 
-3. Что показал check.py: сколько прогонов, нашёл ли расхождения, как исправили?
+3. _Что показал check.py: сколько прогонов, нашёл ли расхождения, как исправили?_
 Было выполнено 1300 проверок: 300 для сортировок, 900 для поиска и 100 для Two Sum. Ошибок и расхождений не найдено, все проверки успешно пройдены. 
 Программа вывела:
 ![](../../images/lab07/check_result.png)
