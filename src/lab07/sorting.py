@@ -8,7 +8,7 @@ def bubble_sort(nums):
             if result[j] > result[j+1]:
                 result[j],result[j+1] = result[j+1],result[j]
     return result
- 
+
 def insertion_sort(nums):
     ''' Возвращает отсортированный список методом сортировки вставками.
     Исходный список не меняется. '''
