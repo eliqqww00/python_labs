@@ -40,16 +40,21 @@ def students_from_json(path) -> list[dict]:
     return students
 
 if __name__ == '__main__':
+    input_file = 'data/lab08/students_input.json'
+    output_file = 'data/lab08/students_output.json'
+    bad_file = 'data/lab08/students_bad.json'
 
     # 1. туда и обратно
-    students = students_from_json('data/lab08/students_input.json')
-    students_to_json(students, 'data/lab08/students_output.json')
-    loaded = students_from_json('data/lab08/students_output.json')
-    print(loaded)
-    print(loaded == students)
+    print (f'чтение из {input_file}, сохранение в {output_file}')
+    try:
+        students_list = students_from_json(input_file)
+
+        students_to_json(students_list,output_file)
+    except ValueError as e:
+        print(f'ошибка: {e}')
 
     # 2. битый
     try:
         students_from_json('data/lab08/students_bad.json')
     except ValueError as e:
-        print(f'{e}')
+        print(f'ошибка: {e}')
