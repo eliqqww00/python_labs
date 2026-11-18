@@ -1,8 +1,17 @@
 # Отчет по лабораторной работе №8
 
 ## Задание А. Реализация модели Student / модуль `models.py`
+Модель Student описывает запись в виде словаря с фиксированным набором ключей, закреплённым в константе student_fields = ("fio", "birthdate", "group", "gpa")
+
+### Используемые библиотеки
+- `datetime.date` – стандартная библиотека, разбор дат (`date.fromisoformat`) и вычисление возраста.
+```python
+from datetime import date
+```
+
 ### Проверки полей / check_(...)
 Каждая проверяет одно поле и при проблеме бросает `ValueError` с названием поля и причиной.
+1. ```check_fio``` - ФИО должно существовать и быть строкой.
 ```python
 def check_fio(value) -> None:
     if not isinstance(value,str):
